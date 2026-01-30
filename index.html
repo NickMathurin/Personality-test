@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="indexcss.css">
+    <title>Personality Test</title>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Quick Personality Test</h2>
+
+        <form id="personalityForm" action="valentine.html" method="get">
+
+            <!-- Question 1 -->
+            <label>How do you feel about your daily routine?</label>
+            <input type="radio" name="routine" required> Very satisfied<br>
+            <input type="radio" name="routine"> Satisfied<br>
+            <input type="radio" name="routine"> Neutral<br>
+            <input type="radio" name="routine"> Unsatisfied<br><br>
+
+            <!-- Question 2 -->
+            <label>When making decisions, you tend to rely more on:</label>
+            <input type="radio" name="decision" required> Logic and facts<br>
+            <input type="radio" name="decision"> Emotions and intuition<br>
+            <input type="radio" name="decision"> A mix of both<br><br>
+
+            <!-- Question 3 -->
+            <label>Which activities do you enjoy most in your free time?</label>
+            <input type="checkbox"> Watching movies or shows<br>
+            <input type="checkbox"> Spending time with friends<br>
+            <input type="checkbox"> Relaxing alone<br>
+            <input type="checkbox"> Trying new experiences<br>
+            <input type="checkbox"> Creative hobbies<br><br>
+
+            <!-- Question 4 -->
+            <label>How do you usually approach new experiences?</label>
+            <select required>
+                <option value="">Select one</option>
+                <option>With excitement</option>
+                <option>With curiosity</option>
+                <option>With caution</option>
+                <option>I prefer familiar things</option>
+            </select>
+
+            <!-- Question 5 -->
+            <label>What matters most to you in a meaningful experience?</label>
+            <select required>
+                <option value="">Select one</option>
+                <option>Connection</option>
+                <option>Comfort</option>
+                <option>Fun</option>
+                <option>Surprise</option>
+                <option>Quality time</option>
+            </select>
+
+            <!-- Question 6-->
+            <label>Do you have a boyfriend?</label>
+            <input type="radio" name="boyfriend" value="yes" required> Yes<br>
+            <input type="radio" name="boyfriend" value="no"> No <br>
+            <span id="error-message">Stop lying!</span><br>
+
+            <!-- Question 7-->
+            <label>How does your boyfriend treat you - answer only if you have a boyfriend</label>
+            <select>
+                <option value="">Select one</option>
+                <option> Amazing </option>
+                <option> Great </option>
+                <option> Fine </option>
+                <option> Not great</option>
+                <option> Toxic</option>
+            </select>
+
+
+
+            <button type="submit">View Results</button>
+        </form>
+    </div>
+
+        <script>
+        const form = document.getElementById('personalityForm');
+        const errorMessage = document.getElementById('error-message');
+        let count = 0;
+        form.addEventListener('submit', function(event) {
+            const choice = document.querySelector('input[name="boyfriend"]:checked');
+            
+            if(choice && choice.value === "no") {
+                if(count == 1){
+                    errorMessage.textContent = "I said stop lying !";
+                }
+                else if(count == 2){
+                    errorMessage.textContent = "Why you keep doing it ...";
+                }
+                else if(count >= 3){
+                    errorMessage.textContent = "Just say you hate me at this point :(";
+                }
+                event.preventDefault();
+                errorMessage.style.display = 'block';
+                count ++;
+
+            } else {
+                errorMessage.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

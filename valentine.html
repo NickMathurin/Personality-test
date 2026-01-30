@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="valentinecss.css">
+    <title>Valentine Surprise</title>
+</head>
+
+<body>
+    <div class="message-container">
+
+        <div class="valentine-message" id="finalMessage"></div>
+
+        <div class="message active">Hey… so about the test you just submitted...</div>
+        <div class="message">It wasn’t really a real personality test 😏</div>
+        <div class="message">I actually wanted to surprise you…</div>
+        <div class="message">So…</div>
+        <div class="message">Will you be my Valentine?! 💖</div>
+
+        <button id="nextBtn">Next</button>
+
+        <div class="valentine-buttons">
+            <button id="yesBtn">Yes 💖</button>
+            <button id="noBtn">No 😢</button>
+        </div>
+    </div>
+
+    <script>
+        const messages = document.querySelectorAll('.message');
+        const nextBtn = document.getElementById('nextBtn');
+        const valentineButtons = document.querySelector('.valentine-buttons');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const finalMessage = document.getElementById('finalMessage');
+        let current = 0;
+
+        nextBtn.addEventListener('click', () => {
+            messages[current].classList.remove('active');
+            current++;
+
+            if (current < messages.length) {
+                messages[current].classList.add('active');
+
+                if (current === messages.length - 1) {
+                    if (current + 1 > messages.length - 1) {
+                        switchToValentine("Will you be my Valentine?! 💖");
+                    }
+                    nextBtn.style.display = 'none';
+                    valentineButtons.style.display = 'block';
+                }
+            }
+        });
+
+        noBtn.addEventListener('mouseenter', () => {
+            const container = document.querySelector('.valentine-buttons');
+            const containerRect = container.getBoundingClientRect();
+
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+
+            const padding = 20;
+            const randomX = Math.floor(Math.random() * (vw - noBtn.offsetWidth - padding));
+            const randomY = Math.floor(Math.random() * (vh - noBtn.offsetHeight - padding));
+
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        });
+
+
+        function switchToValentine(message) {
+            document.body.classList.add('valentine');
+            valentineButtons.style.display = 'none';
+            messages[current].style.display = 'none';
+            finalMessage.textContent = message;
+            finalMessage.style.display = 'block';
+        }
+
+        yesBtn.addEventListener('click', () => {
+            valentineButtons.style.display = 'none';
+            messages[current].style.display = 'none';
+
+            finalMessage.textContent = "LETS GOOOO ! 💖";
+            finalMessage.style.display = 'block';
+            finalMessage.style.color = "magenta"
+
+            document.body.style.backgroundColor = 'pink';
+            document.body.style.backgroundImage = "url('pig.png')";
+            document.body.style.backgroundRepeat = "no-repeat"
+            document.body.style.backgroundPosition = "center";
+        });
+    </script>
+</body>
+
+</html>
